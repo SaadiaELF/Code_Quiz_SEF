@@ -1,7 +1,9 @@
 var timeEl = document.getElementById("timer");
 var startBtn = document.getElementById("startButton");
 var startPage = document.getElementById("startPage");
+var question = document.getElementById("question");
 var secondsLeft = 60;
+
 
 function startTimer() {
     var timerInterval = setInterval(function () {
@@ -18,5 +20,7 @@ function startTimer() {
 startBtn.addEventListener("click", function (event) {
     event.preventDefault();
     startTimer();
-    startPage.style.display = "none"
+    startPage.style.display = "none";
+    question.style.display = "block";
 });
+
