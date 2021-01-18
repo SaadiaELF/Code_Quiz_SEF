@@ -1,5 +1,6 @@
 var timeEl = document.getElementById("timer");
 var startBtn = document.getElementById("startButton");
+var startPage = document.getElementById("startPage");
 var secondsLeft = 60;
 
 function startTimer() {
@@ -16,6 +17,6 @@ function startTimer() {
 
 startBtn.addEventListener("click", function (event) {
     event.preventDefault();
-    startTimer()
-
+    startTimer();
+    startPage.style.display = "none"
 });
