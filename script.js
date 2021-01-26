@@ -83,8 +83,13 @@ startBtn.addEventListener("click", function (event) {
     startTimer();
     startPage.style.display = "none";
     questionContainer.style.display = "block";
-    nextQuestion(0);
-   
+    for (var i = 0; i < Questions.length; i++) {
+        createQuestions(i);
+        clickBtn(i + 1);
+    };
+
+    document.getElementById("question01").style.display = "block";
+
 });
 
 function createQuestions(i) {
@@ -96,8 +101,9 @@ function createQuestions(i) {
     col.setAttribute("class", "col-6");
     col.setAttribute("style", "margin-top : 30px");
     col.appendChild(h2Tag);
-    //document.getElementById("question0"+ (i + 1)).style.display = "block";
-    //col.style.display = "block";
+
+    col.style.display = "none";
+
     Questions[i].answers.forEach(function (item, j) {
 
         var btn = document.createElement("BUTTON");
@@ -106,24 +112,34 @@ function createQuestions(i) {
         btn.textContent = Questions[i].answers[j][0];
         row.appendChild(col);
         col.appendChild(btn);
+
     });
 
 };
 
+
+
 function clickBtn(a) {
-    var btns = document.querySelectorAll('.btn')
+    var qst = document.querySelector('#question0' + (a));
+    var btns = qst.querySelectorAll('.btn');
     btns.forEach(function (btn, i) {
         btn.addEventListener("click", function (event) {
             event.preventDefault();
-            document.getElementById("question0"+a).style.display = "none";
             createQuestions(a);
+
+            if (Questions[a - 1].answers[i][1]) {
+                console.log("correct answer !!");
+            } else {
+                console.log("bad answer !!");
+            }
+
+            document.getElementById("question0" + a).style.display = "none";
+
+            if (a < Questions.length) {
+                document.getElementById('question0' + (a + 1)).style.display = "block";
+            }
+
         });
     });
 };
 
-
-function nextQuestion(a) {
-    createQuestions(a);
-    clickBtn(a+1);
-    
-}
