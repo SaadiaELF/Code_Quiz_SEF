@@ -2,9 +2,11 @@ var timeEl = document.getElementById("timer");
 var startBtn = document.getElementById("startButton");
 var startPage = document.getElementById("startPage");
 var questionContainer = document.getElementById("question");
-var questionText = document.getElementById("questionText");
-var row = document.getElementById("row");
+var questionRow = document.getElementById("questionRow");
+var answerRow = document.getElementById("answerRow");
+var answer = document.getElementById("answer");
 var secondsLeft = 60;
+var score = 0;
 var Questions = [
     {
         question: "What does HTML stand for ?",
@@ -31,7 +33,7 @@ var Questions = [
         answers: [
             ["<body>", false],
             ["<head>", false],
-            ["html", true],
+            ["<html>", true],
             ["<title>", false],
         ]
     },
@@ -110,7 +112,7 @@ function createQuestions(i) {
         btn.setAttribute("id", "choice0" + (j + 1));
         btn.setAttribute("class", "btn btn-outline-info btn-lg btn-rounded btn-block");
         btn.textContent = Questions[i].answers[j][0];
-        row.appendChild(col);
+        questionRow.appendChild(col);
         col.appendChild(btn);
 
     });
@@ -118,25 +120,35 @@ function createQuestions(i) {
 };
 
 
-
 function clickBtn(a) {
-    var qst = document.querySelector('#question0' + (a));
+    var qst = document.querySelector('#question0' + a);
     var btns = qst.querySelectorAll('.btn');
     btns.forEach(function (btn, i) {
         btn.addEventListener("click", function (event) {
             event.preventDefault();
             createQuestions(a);
+            qst.style.display = "none";
 
             if (Questions[a - 1].answers[i][1]) {
-                console.log("correct answer !!");
+                score += 10;
+                answer.textContent = "Correcr answer !!"
+                answer.style.color = "green"
+                answerRow.style.display = "block";
             } else {
-                console.log("bad answer !!");
-            }
+                secondsLeft -= 5;
+                answer.textContent = "Wrong answer !!"
+                answer.style.color = "red"
+                answerRow.style.display = "block";
 
-            document.getElementById("question0" + a).style.display = "none";
+            }
 
             if (a < Questions.length) {
                 document.getElementById('question0' + (a + 1)).style.display = "block";
+            }
+
+            if (secondsLeft === 0) {
+                questionContainer.style.display = "none";
+
             }
 
         });
