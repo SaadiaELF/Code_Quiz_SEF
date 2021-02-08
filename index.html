@@ -6,19 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coding Quiz</title>
     <link rel="icon" type="image/png" href="assets/icon.png">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.0.0/mdb.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div id="container" class="container">
         <header class="row justify-content-between">
-            <div class="col-4">
+            <div class="col-2 float-start">
                 <a id="highscorses" href="./Highscores.html">View Highscores</a>
             </div>
-            <div class="col-4">
-                <div id="timer" class="text-right">Time : 0</div>
+            <div class="col-2 float-end">
+                <div id="timer" class="text-end">Time : 0</div>
             </div>
         </header>
 
@@ -48,17 +49,33 @@
         </div>
 
         <div id="question" class="container" style="display:none">
+            <div id="questionRow" class="row justify-content-center">
+                <br>
+                <br>
+
+            </div>
+            <div id="answerRow" class="row justify-content-center hide">
+                <div class="col-auto">
+                    <br>
+                    <h5 id="answer" class="fw-bold"> </h5>
+                </div>
+            </div>
+        </div>
+
+        <div id="scorePage" class="container" style="display:none">
             <div class="row justify-content-center">
-                <div class="col-6">
-                    <br>
-                    <br>
-                    <h2><strong></strong></h2>
-                    <br>
-                    <br>
-                    <button id="correct" type="button" class="btn btn-outline-info btn-lg btn-rounded btn-block"></button>
-                    <button id="incorrect" type="button" class="btn btn-outline-info btn-lg btn-rounded btn-block"></button>
-                    <button id="incorrect" type="button" class="btn btn-outline-info btn-lg btn-rounded btn-block"></button>
-                    <button id="incorrect" type="button" class="btn btn-outline-info btn-lg btn-rounded btn-block"></button>
+                <h2> All done !</h2>
+                <h5 id="yourScore" class="fw-normal"> Your final score is : </h5>
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label for="initials" class="col-form-label">Enter your initials</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="text" id="initials" class="form-control">
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
                 </div>
             </div>
         </div>
