@@ -5,6 +5,7 @@ var questionContainer = document.getElementById("question");
 var questionRow = document.getElementById("questionRow");
 var answerRow = document.getElementById("answerRow");
 var answer = document.getElementById("answer");
+var scorePage = document.getElementById("scorePage");
 var secondsLeft = 60;
 var score = 0;
 var Questions = [
@@ -73,11 +74,12 @@ function startTimer() {
     var timerInterval = setInterval(function () {
         secondsLeft--;
         timeEl.textContent = "Time : " + secondsLeft;
+
+        if (secondsLeft <= 0) {
+            clearInterval(timerInterval);
+        };
     }, 1000);
 
-    if (secondsLeft === 0) {
-        clearInterval(timerInterval);
-    };
 };
 
 startBtn.addEventListener("click", function (event) {
@@ -94,12 +96,12 @@ startBtn.addEventListener("click", function (event) {
 
 });
 
-function createQuestions(i) {
+function createQuestions(i) {//5
 
     var h2Tag = document.createElement("H2");
     h2Tag.innerHTML = Questions[i].question;
     var col = document.createElement("DIV");
-    col.setAttribute("id", "question0" + (i + 1));
+    col.setAttribute("id", "question0" + (i + 1));//6
     col.setAttribute("class", "col-6");
     col.setAttribute("style", "margin-top : 30px");
     col.appendChild(h2Tag);
@@ -121,37 +123,42 @@ function createQuestions(i) {
 
 
 function clickBtn(a) {
-    var qst = document.querySelector('#question0' + a);
+    var qst = document.querySelector('#question0' + a);//6
     var btns = qst.querySelectorAll('.btn');
     btns.forEach(function (btn, i) {
         btn.addEventListener("click", function (event) {
             event.preventDefault();
-            createQuestions(a);
-            qst.style.display = "none";
-
-            if (Questions[a - 1].answers[i][1]) {
-                score += 10;
-                answer.textContent = "Correcr answer !!"
-                answer.style.color = "green"
-                answerRow.style.display = "block";
-            } else {
-                secondsLeft -= 5;
-                answer.textContent = "Wrong answer !!"
-                answer.style.color = "red"
-                answerRow.style.display = "block";
-
-            }
-
             if (a < Questions.length) {
+                createQuestions(a);//6
+                qst.style.display = "none";//6
+
+                if (Questions[a - 1].answers[i][1]) {
+                    score += 10;
+                    answer.textContent = "Correcr answer !!"
+                    answer.style.color = "green"
+                    answerRow.classList.remove("hide");
+                } else {
+                    secondsLeft -= 5;
+                    answer.textContent = "Wrong answer !!"
+                    answer.style.color = "red"
+                    answerRow.classList.remove("hide");
+                };
                 document.getElementById('question0' + (a + 1)).style.display = "block";
             }
 
             if (secondsLeft === 0) {
                 questionContainer.style.display = "none";
-
-            }
+            };
 
         });
     });
 };
 
+
+function showScore(a) {
+
+    qst.style.display = "none";
+    answerRow.style.display = "none";
+    scorePage.style.display = "block";
+
+}
