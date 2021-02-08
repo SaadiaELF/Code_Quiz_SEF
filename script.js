@@ -85,28 +85,27 @@ function startTimer() {
 startBtn.addEventListener("click", function (event) {
     event.preventDefault();
     startTimer();
-    startPage.style.display = "none";
-    questionContainer.style.display = "block";
+    startPage.setAttribute("class", "hide");
+    questionContainer.classList.remove("hide");
     for (var i = 0; i < Questions.length; i++) {
         createQuestions(i);
         clickBtn(i + 1);
     };
 
-    document.getElementById("question01").style.display = "block";
+    document.getElementById("question01").classList.remove("hide");
 
 });
 
-function createQuestions(i) {//5
+function createQuestions(i) {
 
     var h2Tag = document.createElement("H2");
     h2Tag.innerHTML = Questions[i].question;
     var col = document.createElement("DIV");
-    col.setAttribute("id", "question0" + (i + 1));//6
-    col.setAttribute("class", "col-6");
+    col.setAttribute("id", "question0" + (i + 1));
+    col.setAttribute("class", "col-6 hide");
     col.setAttribute("style", "margin-top : 30px");
     col.appendChild(h2Tag);
 
-    col.style.display = "none";
 
     Questions[i].answers.forEach(function (item, j) {
 
@@ -123,14 +122,14 @@ function createQuestions(i) {//5
 
 
 function clickBtn(a) {
-    var qst = document.querySelector('#question0' + a);//6
+    var qst = document.querySelector('#question0' + a);
     var btns = qst.querySelectorAll('.btn');
     btns.forEach(function (btn, i) {
         btn.addEventListener("click", function (event) {
             event.preventDefault();
             if (a < Questions.length) {
-                createQuestions(a);//6
-                qst.style.display = "none";//6
+                createQuestions(a);
+                qst.classList.add("hide");
 
                 if (Questions[a - 1].answers[i][1]) {
                     score += 10;
@@ -143,11 +142,11 @@ function clickBtn(a) {
                     answer.style.color = "red"
                     answerRow.classList.remove("hide");
                 };
-                document.getElementById('question0' + (a + 1)).style.display = "block";
+                document.getElementById('question0' + (a + 1)).classList.remove("hide");
             }
 
             if (secondsLeft === 0) {
-                questionContainer.style.display = "none";
+                questionContainer.classList.add("hide");
             };
 
         });
@@ -157,8 +156,8 @@ function clickBtn(a) {
 
 function showScore(a) {
 
-    qst.style.display = "none";
-    answerRow.style.display = "none";
-    scorePage.style.display = "block";
+    qst.classList.add("hide");
+    answerRow.classList.add("hide");
+    scorePage.classList.remove("hide");
 
 }
