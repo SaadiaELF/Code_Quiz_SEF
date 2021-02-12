@@ -192,5 +192,10 @@ function saveName() {
         var namesList = JSON.parse(localStorage.getItem("Names")) || [];
         if (yourName) namesList.push(yourName);
         localStorage.setItem("Names", JSON.stringify(namesList));
+        localStorage.setItem("Last score", score);
+        var scoresList = JSON.parse(localStorage.getItem("Scores")) || [];
+        if (score) scoresList.push(score);
+        localStorage.setItem("Scores", JSON.stringify(scoresList));
+
     });
 }
