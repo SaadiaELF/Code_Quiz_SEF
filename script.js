@@ -8,6 +8,7 @@ var answer = document.getElementById("answer");
 var scorePage = document.getElementById("scorePage");
 var secondsLeft = 60;
 var score = 0;
+// Object that holds questions and their answers 
 var Questions = [
     {
         question: "What does HTML stand for ?",
@@ -69,7 +70,7 @@ var Questions = [
         ]
     },
 ];
-
+// Setting up a timer 
 function startTimer() {
     var timerInterval = setInterval(function () {
         secondsLeft--;
@@ -82,11 +83,14 @@ function startTimer() {
 
 };
 
+// When the start button is clicked the timer starts , the first page disappear 
+// and the first question will be shown
 startBtn.addEventListener("click", function (event) {
     event.preventDefault();
     startTimer();
     startPage.setAttribute("class", "hide");
     questionContainer.classList.remove("hide");
+
     for (var i = 0; i < Questions.length; i++) {
         createQuestions(i);
         clickBtn(i + 1);
@@ -96,6 +100,7 @@ startBtn.addEventListener("click", function (event) {
 
 });
 
+// Create a div that holds a question and its choices
 function createQuestions(i) {
 
     var h2Tag = document.createElement("H2");
@@ -111,7 +116,7 @@ function createQuestions(i) {
 
         var btn = document.createElement("BUTTON");
         btn.setAttribute("id", "choice0" + (j + 1));
-        btn.setAttribute("class", "btn btn-outline-info btn-lg btn-rounded btn-block");
+        btn.setAttribute("class", "btnChoice btn btn-outline-info btn-lg btn-rounded btn-block");
         btn.textContent = Questions[i].answers[j][0];
         questionRow.appendChild(col);
         col.appendChild(btn);
@@ -120,23 +125,25 @@ function createQuestions(i) {
 
 };
 
-
+// When a choice is clicked 
 function clickBtn(a) {
     var qst = document.querySelector('#question0' + a);
-    var btns = qst.querySelectorAll('.btn');
+    var btns = qst.querySelectorAll('.btnChoice');
     btns.forEach(function (btn, i) {
-        btn.addEventListener("click", function (event) {
-            event.preventDefault();
+        btn.addEventListener("click", function () {
+        //   If the btnChoice is clicked the previous question is hidden and the next question is shown
             if (a < Questions.length) {
                 createQuestions(a);
                 qst.classList.add("hide");
-
+                // if the answers is true increment the score by 10 and show "Correct answer !!"
                 if (Questions[a - 1].answers[i][1]) {
                     score += 10;
-                    answer.textContent = "Correcr answer !!"
+                    answer.textContent = "Correct answer !!"
                     answer.style.color = "green"
                     answerRow.classList.remove("hide");
-                } else {
+
+                // if the answers is false increment the score by 10 and show "Wrong answer !!"
+            } else {
                     secondsLeft -= 5;
                     answer.textContent = "Wrong answer !!"
                     answer.style.color = "red"
@@ -145,18 +152,14 @@ function clickBtn(a) {
                 document.getElementById('question0' + (a + 1)).classList.remove("hide");
             }
 
-            if (secondsLeft === 0) {
-                questionContainer.classList.add("hide");
-            };
-
         });
     });
 };
 
 
-function showScore(a) {
+function showScore() {
 
-    qst.classList.add("hide");
+    document.getElementById("question06").classList.add("hide");
     answerRow.classList.add("hide");
     scorePage.classList.remove("hide");
 
