@@ -6,7 +6,9 @@ var questionRow = document.getElementById("questionRow");
 var answerRow = document.getElementById("answerRow");
 var answer = document.getElementById("answer");
 var scorePage = document.getElementById("scorePage");
-var yourScore = document.getElementById("yourScore"); 
+var yourScore = document.getElementById("yourScore");
+// var initials = document.getElementById("initials");
+var submit = document.getElementById("submit");
 var secondsLeft = 60;
 var score = 0;
 // Object that holds questions and their answers 
@@ -160,6 +162,7 @@ function showScore() {
     answerRow.classList.add("hide");
     scorePage.classList.remove("hide");
     yourScore.append(score);
+    saveName();
 
 }
 
@@ -182,5 +185,12 @@ function trueFalse(a, i) {
 }
 
 function saveName() {
-    
+    submit.addEventListener("click", function (event) {
+        event.preventDefault();
+        var yourName = document.querySelector("#initials").value;
+        localStorage.setItem("Last name", yourName);
+        var namesList = JSON.parse(localStorage.getItem("Names")) || [];
+        if (yourName) namesList.push(yourName);
+        localStorage.setItem("Names", JSON.stringify(namesList));
+    });
 }
