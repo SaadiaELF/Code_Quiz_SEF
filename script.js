@@ -6,6 +6,7 @@ var questionRow = document.getElementById("questionRow");
 var answerRow = document.getElementById("answerRow");
 var answer = document.getElementById("answer");
 var scorePage = document.getElementById("scorePage");
+var yourScore = document.getElementById("yourScore"); 
 var secondsLeft = 60;
 var score = 0;
 // Object that holds questions and their answers 
@@ -158,6 +159,7 @@ function showScore() {
     document.getElementById("question06").classList.add("hide");
     answerRow.classList.add("hide");
     scorePage.classList.remove("hide");
+    yourScore.append(score);
 
 }
 
@@ -177,4 +179,8 @@ function trueFalse(a, i) {
         answerRow.classList.remove("hide");
     };
 
+}
+
+function saveName() {
+    
 }
