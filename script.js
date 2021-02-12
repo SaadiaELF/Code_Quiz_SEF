@@ -116,7 +116,7 @@ function createQuestions(i) {
 
         var btn = document.createElement("BUTTON");
         btn.setAttribute("id", "choice0" + (j + 1));
-        btn.setAttribute("class", "btnChoice btn btn-outline-info btn-lg btn-rounded btn-block");
+        btn.setAttribute("class", "btnChoice" + (i + 1) + " btn btn-outline-info btn-lg btn-rounded btn-block");
         btn.textContent = Questions[i].answers[j][0];
         questionRow.appendChild(col);
         col.appendChild(btn);
@@ -128,32 +128,28 @@ function createQuestions(i) {
 // When a choice is clicked 
 function clickBtn(a) {
     var qst = document.querySelector('#question0' + a);
-    var btns = qst.querySelectorAll('.btnChoice');
+    var btns = qst.querySelectorAll('.btnChoice' + a);
     btns.forEach(function (btn, i) {
         btn.addEventListener("click", function () {
-        //   If the btnChoice is clicked the previous question is hidden and the next question is shown
+            //   If the btnChoice is clicked the previous question is hidden and the next question is shown
             if (a < Questions.length) {
                 createQuestions(a);
                 qst.classList.add("hide");
-                // if the answers is true increment the score by 10 and show "Correct answer !!"
-                if (Questions[a - 1].answers[i][1]) {
-                    score += 10;
-                    answer.textContent = "Correct answer !!"
-                    answer.style.color = "green"
-                    answerRow.classList.remove("hide");
-
-                // if the answers is false increment the score by 10 and show "Wrong answer !!"
-            } else {
-                    secondsLeft -= 5;
-                    answer.textContent = "Wrong answer !!"
-                    answer.style.color = "red"
-                    answerRow.classList.remove("hide");
-                };
+                trueFalse(a, i);
                 document.getElementById('question0' + (a + 1)).classList.remove("hide");
             }
-
         });
     });
+
+    if (a == 6) {
+        btns.forEach(function (btn, i) {
+            btn.addEventListener("click", function () {
+                trueFalse(a, i);
+                showScore();
+            });
+        });
+
+    }
 };
 
 
@@ -162,5 +158,23 @@ function showScore() {
     document.getElementById("question06").classList.add("hide");
     answerRow.classList.add("hide");
     scorePage.classList.remove("hide");
+
+}
+
+function trueFalse(a, i) {
+    // if the answers is true increment the score by 10 and show "Correct answer !!"
+    if (Questions[a - 1].answers[i][1]) {
+        score += 10;
+        answer.textContent = "Correct answer !!"
+        answer.style.color = "green"
+        answerRow.classList.remove("hide");
+
+        // if the answers is false increment the score by 10 and show "Wrong answer !!"
+    } else {
+        secondsLeft -= 5;
+        answer.textContent = "Wrong answer !!"
+        answer.style.color = "red"
+        answerRow.classList.remove("hide");
+    };
 
 }
