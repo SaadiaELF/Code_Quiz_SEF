@@ -7,8 +7,10 @@ var answerRow = document.getElementById("answerRow");
 var answer = document.getElementById("answer");
 var scorePage = document.getElementById("scorePage");
 var yourScore = document.getElementById("yourScore");
-// var initials = document.getElementById("initials");
+var initials = document.getElementById("initials");
 var submit = document.getElementById("submit");
+var scoresList = document.getElementById("scoresList");
+var highscoresPage = document.getElementById("highscoresPage");
 var secondsLeft = 60;
 var score = 0;
 // Object that holds questions and their answers 
@@ -187,7 +189,7 @@ function trueFalse(a, i) {
 function saveName() {
     submit.addEventListener("click", function (event) {
         event.preventDefault();
-        var yourName = document.querySelector("#initials").value;
+        var yourName = initials.value;
         localStorage.setItem("Last name", yourName);
         var namesList = JSON.parse(localStorage.getItem("Names")) || [];
         if (yourName) namesList.push(yourName);
@@ -196,6 +198,22 @@ function saveName() {
         var scoresList = JSON.parse(localStorage.getItem("Scores")) || [];
         if (score) scoresList.push(score);
         localStorage.setItem("Scores", JSON.stringify(scoresList));
+        renderHighscores();
 
     });
+}
+
+function renderHighscores() {
+    scorePage.classList.add("hide");
+    highscoresPage.classList.remove("hide");
+    var namesArr = JSON.parse(localStorage.getItem("Names"));
+    var scoresArr = JSON.parse(localStorage.getItem("Scores"));
+
+    for (var i = 0; i < namesArr.length; i++) {
+        var elt = document.createElement("li");
+        elt.innerHTML= i + ". " + namesArr[i] + "--" + scoresArr[i];
+        scoresList.appendChild(elt);
+    }
+
+
 }
