@@ -16,7 +16,7 @@
     <div id="container" class="container">
         <header class="row justify-content-between">
             <div class="col-2 float-start">
-                <a id="highscorses" href="./Highscores.html">View Highscores</a>
+                <a id="highscores">View Highscores</a>
             </div>
             <div class="col-2 float-end">
                 <div id="timer" class="text-end">Time : 0</div>
@@ -48,7 +48,7 @@
             </div>
         </div>
 
-        <div id="question" class="container hide" >
+        <div id="question" class="container hide">
             <div id="questionRow" class="row justify-content-center">
                 <br>
                 <br>
@@ -62,7 +62,7 @@
             </div>
         </div>
 
-        <div id="scorePage" class="container hide" >
+        <div id="scorePage" class="container hide">
             <div class="row justify-content-center">
                 <h2> All done !</h2>
                 <h5 id="yourScore" class="fw-normal"> Your final score is : </h5>
@@ -74,9 +74,25 @@
                         <input type="text" id="initials" class="form-control">
                     </div>
                     <div class="col-auto">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary" id="submit">Submit</button>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div id="highscoresPage" class="container">
+            <div class="row justify-content-center">
+                <h2> Highscores</h2>
+                <ol id="scoresList">
+                </ol>
+                <ul id="highscoreBtn">
+                    <li>
+                        <button type="submit" class="btn btn-primary" id="back">Go back</button>
+                    </li>
+                    <li>
+                        <button type="submit" class="btn btn-primary" id="clear">Clear highscore</button>
+                    </li>
+                </ul>
             </div>
         </div>
 
