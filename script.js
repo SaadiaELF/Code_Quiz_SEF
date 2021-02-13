@@ -186,6 +186,7 @@ function trueFalse(a, i) {
 
 }
 
+// Creating locl storage to store initials and scores
 function saveName() {
     submit.addEventListener("click", function (event) {
         event.preventDefault();
@@ -210,10 +211,14 @@ function renderHighscores() {
     var scoresArr = JSON.parse(localStorage.getItem("Scores"));
 
     for (var i = 0; i < namesArr.length; i++) {
-        var elt = document.createElement("li");
-        elt.innerHTML= i + ". " + namesArr[i] + "--" + scoresArr[i];
-        scoresList.appendChild(elt);
+        var elt1 = document.createElement("li");
+        var elt2 = document.createElement("li");
+        elt1.innerHTML = namesArr[i] + " -- " + scoresArr[i];
+        elt2.innerHTML = namesArr[i + 1] + " -- " + scoresArr[i + 1];
+        if (scoresArr[i] >= scoresArr[i + 1]) {
+            scoresList.appendChild(elt1);
+        }else{
+            scoresList.appendChild(elt2);
+        }
     }
-
-
 }
