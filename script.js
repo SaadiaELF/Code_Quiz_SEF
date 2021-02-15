@@ -12,6 +12,8 @@ var submit = document.getElementById("submit");
 var scoresList = document.getElementById("scoresList");
 var highscoresPage = document.getElementById("highscoresPage");
 var highscoresBtn = document.getElementById("highscores");
+var backBtn = document.getElementById("back");
+var clearBtn = document.getElementById("clear");
 var secondsLeft = 60;
 var score = 0;
 // Object that holds questions and their answers 
@@ -123,7 +125,7 @@ function createQuestions(i) {
     h2Tag.innerHTML = Questions[i].question;
     var col = document.createElement("DIV");
     col.setAttribute("id", "question0" + (i + 1));
-    col.setAttribute("class", "col-6 hide");
+    col.setAttribute("class", "col-8 hide");
     col.setAttribute("style", "margin-top : 30px");
     col.appendChild(h2Tag);
 
@@ -132,7 +134,7 @@ function createQuestions(i) {
 
         var btn = document.createElement("BUTTON");
         btn.setAttribute("id", "choice0" + (j + 1));
-        btn.setAttribute("class", "btnChoice" + (i + 1) + " btn btn-outline-info btn-lg btn-rounded btn-block");
+        btn.setAttribute("class", "btnChoice" + (i + 1) + " btn btn-outline-danger btn-lg btn-rounded btn-block");
         btn.textContent = Questions[i].answers[j][0];
         questionRow.appendChild(col);
         col.appendChild(btn);
@@ -239,3 +241,22 @@ function renderHighscores() {
         scoresList.appendChild(elt);
     }
 }
+
+back.addEventListener("click", function (event) {
+    event.preventDefault();
+    timeEl.textContent = "Time : 0";
+    secondsLeft = 60;
+    startPage.classList.remove("hide");
+    questionContainer.classList.add("hide");
+    scorePage.classList.add("hide");
+    highscoresPage.classList.add("hide");
+});
+
+clear.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    startPage.classList.add("hide");
+    questionContainer.classList.add("hide");
+    scorePage.classList.add("hide");
+    highscoresPage.classList.remove("hide");
+});
