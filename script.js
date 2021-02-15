@@ -254,9 +254,6 @@ back.addEventListener("click", function (event) {
 
 clear.addEventListener("click", function (event) {
     event.preventDefault();
-
-    startPage.classList.add("hide");
-    questionContainer.classList.add("hide");
-    scorePage.classList.add("hide");
-    highscoresPage.classList.remove("hide");
+    scoresList.textContent = "";
+    localStorage.clear();
 });
