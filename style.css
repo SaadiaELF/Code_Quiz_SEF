@@ -1,3 +1,10 @@
+body {
+    font-family: 'Dosis', sans-serif;
+    font-weight: bold;
+}
+#startPage h1{
+font-family: 'Oswald', sans-serif;
+}
 .hide {
     display: none;
 }
@@ -8,4 +15,8 @@
 
 #highscoreBtn li {
     display: inline-block;
+}
+
+.btn{
+    font-weight: bolder;
 }
