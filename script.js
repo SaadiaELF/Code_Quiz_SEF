@@ -11,6 +11,7 @@ var initials = document.getElementById("initials");
 var submit = document.getElementById("submit");
 var scoresList = document.getElementById("scoresList");
 var highscoresPage = document.getElementById("highscoresPage");
+var highscoresBtn = document.getElementById("highscores");
 var secondsLeft = 60;
 var score = 0;
 // Object that holds questions and their answers 
@@ -75,6 +76,15 @@ var Questions = [
         ]
     },
 ];
+// Click to show highscores page
+highscoresBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+    startPage.classList.add("hide");
+    questionContainer.classList.add("hide");
+    scorePage.classList.add("hide");
+    highscoresPage.classList.remove("hide");
+});
+
 // Setting up a timer 
 function startTimer() {
     var timerInterval = setInterval(function () {
@@ -94,7 +104,7 @@ function startTimer() {
 startBtn.addEventListener("click", function (event) {
     event.preventDefault();
     startTimer();
-    startPage.setAttribute("class", "hide");
+    startPage.classList.add("hide");
     questionContainer.classList.remove("hide");
 
     for (var i = 0; i < Questions.length; i++) {
