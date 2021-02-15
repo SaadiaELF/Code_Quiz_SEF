@@ -82,6 +82,7 @@ function startTimer() {
         timeEl.textContent = "Time : " + secondsLeft;
 
         if (secondsLeft <= 0) {
+            showScore();
             clearInterval(timerInterval);
         };
     }, 1000);
@@ -136,7 +137,7 @@ function clickBtn(a) {
     var btns = qst.querySelectorAll('.btnChoice' + a);
     btns.forEach(function (btn, i) {
         btn.addEventListener("click", function () {
-            //   If the btnChoice is clicked the previous question is hidden and the next question is shown
+            // If the btnChoice is clicked the previous question is hidden and the next question is shown
             if (a < Questions.length) {
                 createQuestions(a);
                 qst.classList.add("hide");
@@ -160,7 +161,7 @@ function clickBtn(a) {
 
 function showScore() {
 
-    document.getElementById("question06").classList.add("hide");
+    questionRow.classList.add("hide");
     answerRow.classList.add("hide");
     scorePage.classList.remove("hide");
     yourScore.append(score);
@@ -197,8 +198,20 @@ function saveName() {
         localStorage.setItem("Names", JSON.stringify(namesList));
         localStorage.setItem("Last score", score);
         var scoresList = JSON.parse(localStorage.getItem("Scores")) || [];
-        if (score) scoresList.push(score);
+        if (score || score === 0) scoresList.push(score);
         localStorage.setItem("Scores", JSON.stringify(scoresList));
+
+        var newarray = [];
+        var object = { name: "", score: "", };
+        for (var i = 0; i < scoresList.length; i++) {
+            object.name = namesList[i];
+            object.score = scoresList[i];
+            console.log(object.name);
+            console.log(object.score);
+            newarray.push(object);
+            console.log(newarray);
+
+        }
         renderHighscores();
 
     });
@@ -211,14 +224,8 @@ function renderHighscores() {
     var scoresArr = JSON.parse(localStorage.getItem("Scores"));
 
     for (var i = 0; i < namesArr.length; i++) {
-        var elt1 = document.createElement("li");
-        var elt2 = document.createElement("li");
-        elt1.innerHTML = namesArr[i] + " -- " + scoresArr[i];
-        elt2.innerHTML = namesArr[i + 1] + " -- " + scoresArr[i + 1];
-        if (scoresArr[i] >= scoresArr[i + 1]) {
-            scoresList.appendChild(elt1);
-        }else{
-            scoresList.appendChild(elt2);
-        }
+        var elt = document.createElement("li");
+        elt.innerHTML = namesArr[i] + " -- " + scoresArr[i];
+        scoresList.appendChild(elt);
     }
 }
