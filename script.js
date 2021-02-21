@@ -17,6 +17,7 @@ var clearBtn = document.getElementById("clear");
 var secondsLeft = 60;
 var score = 0;
 var showScores = false;
+var showPage = true;
 // Object that holds questions and their answers 
 var Questions = [
     {
@@ -80,13 +81,16 @@ var Questions = [
     },
 ];
 // Click to show highscores page
+
 highscoresBtn.addEventListener("click", function (event) {
+    if (showPage) {
     event.preventDefault();
     startPage.classList.add("hide");
     questionContainer.classList.add("hide");
     scorePage.classList.add("hide");
     highscoresPage.classList.remove("hide");
     renderHighscores();
+};
 });
 
 // Setting up a timer 
@@ -95,7 +99,7 @@ function startTimer() {
         secondsLeft--;
         timeEl.textContent = "Time : " + secondsLeft;
 
-        if (secondsLeft <= 0 || showScores === true) {
+        if (showScores === true || secondsLeft <= 0) {
             showScore();
             clearInterval(timerInterval);
             showScores = false;
@@ -111,6 +115,7 @@ startBtn.addEventListener("click", function (event) {
     startTimer();
     startPage.classList.add("hide");
     questionContainer.classList.remove("hide");
+    showPage = false;
 
     for (var i = 0; i < Questions.length; i++) {
         createQuestions(i);
@@ -166,7 +171,7 @@ function clickBtn(a) {
         btns.forEach(function (btn, i) {
             btn.addEventListener("click", function () {
                 trueFalse(a, i);
-                showScore();
+                showScores = true;
             });
         });
 
@@ -175,14 +180,11 @@ function clickBtn(a) {
 
 
 function showScore() {
-
     questionRow.classList.add("hide");
     answerRow.classList.add("hide");
     scorePage.classList.remove("hide");
     yourScore.append(score);
     saveName();
-    showScores = true;
-
 }
 
 function trueFalse(a, i) {
