@@ -16,6 +16,7 @@ var backBtn = document.getElementById("back");
 var clearBtn = document.getElementById("clear");
 var secondsLeft = 60;
 var score = 0;
+var showScores = false;
 // Object that holds questions and their answers 
 var Questions = [
     {
@@ -85,6 +86,7 @@ highscoresBtn.addEventListener("click", function (event) {
     questionContainer.classList.add("hide");
     scorePage.classList.add("hide");
     highscoresPage.classList.remove("hide");
+    renderHighscores();
 });
 
 // Setting up a timer 
@@ -93,9 +95,10 @@ function startTimer() {
         secondsLeft--;
         timeEl.textContent = "Time : " + secondsLeft;
 
-        if (secondsLeft <= 0) {
+        if (secondsLeft <= 0 || showScores === true) {
             showScore();
             clearInterval(timerInterval);
+            showScores = false;
         };
     }, 1000);
 
@@ -178,6 +181,7 @@ function showScore() {
     scorePage.classList.remove("hide");
     yourScore.append(score);
     saveName();
+    showScores = true;
 
 }
 
@@ -203,27 +207,19 @@ function trueFalse(a, i) {
 function saveName() {
     submit.addEventListener("click", function (event) {
         event.preventDefault();
-        var yourName = initials.value;
-        localStorage.setItem("Last name", yourName);
-        var namesList = JSON.parse(localStorage.getItem("Names")) || [];
-        if (yourName) namesList.push(yourName);
-        localStorage.setItem("Names", JSON.stringify(namesList));
-        localStorage.setItem("Last score", score);
-        var scoresList = JSON.parse(localStorage.getItem("Scores")) || [];
-        if (score || score === 0) scoresList.push(score);
-        localStorage.setItem("Scores", JSON.stringify(scoresList));
+        var scoreObj = { name: '', score: '' };
+        scoreObj.name = initials.value;
+        scoreObj.score = score;
+        localStorage.setItem("ScoresObj", JSON.stringify(scoreObj));
+        var ScoresList = JSON.parse(localStorage.getItem("ScoresList")) || [];
+        if (scoreObj) ScoresList.push(scoreObj);
+        localStorage.setItem("ScoresList", JSON.stringify(ScoresList));
 
-        var newarray = [];
-        var object = { name: "", score: "", };
-        for (var i = 0; i < scoresList.length; i++) {
-            object.name = namesList[i];
-            object.score = scoresList[i];
-            console.log(object.name);
-            console.log(object.score);
-            newarray.push(object);
-            console.log(newarray);
+        var ScoresListSorted = ScoresList.sort(function (n1, n2) {
+            return n2.score - n1.score;
+        });
+        localStorage.setItem("ScoresListSorted", JSON.stringify(ScoresListSorted));
 
-        }
         renderHighscores();
 
     });
@@ -232,12 +228,11 @@ function saveName() {
 function renderHighscores() {
     scorePage.classList.add("hide");
     highscoresPage.classList.remove("hide");
-    var namesArr = JSON.parse(localStorage.getItem("Names"));
-    var scoresArr = JSON.parse(localStorage.getItem("Scores"));
+    var scoresArr = JSON.parse(localStorage.getItem("ScoresListSorted"));
 
-    for (var i = 0; i < namesArr.length; i++) {
+    for (var i = 0; i < scoresArr.length; i++) {
         var elt = document.createElement("li");
-        elt.innerHTML = namesArr[i] + " -- " + scoresArr[i];
+        elt.innerHTML = scoresArr[i].name.toUpperCase() + "---" + scoresArr[i].score;
         scoresList.appendChild(elt);
     }
 }
