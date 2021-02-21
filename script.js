@@ -81,7 +81,6 @@ var Questions = [
     },
 ];
 // Click to show highscores page
-
 highscoresBtn.addEventListener("click", function (event) {
     if (showPage) {
     event.preventDefault();
@@ -241,12 +240,7 @@ function renderHighscores() {
 
 back.addEventListener("click", function (event) {
     event.preventDefault();
-    timeEl.textContent = "Time : 0";
-    secondsLeft = 60;
-    startPage.classList.remove("hide");
-    questionContainer.classList.add("hide");
-    scorePage.classList.add("hide");
-    highscoresPage.classList.add("hide");
+    location.reload();
 });
 
 clear.addEventListener("click", function (event) {
