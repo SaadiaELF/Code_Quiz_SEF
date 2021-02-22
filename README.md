@@ -81,23 +81,20 @@ This file is used to create a dynamic website using functions.
 
 -----------------------------------------------------------------------------------------------------------------------
 ## 7. Demonstration :
-Desktop screenshots :
+Screenshots :
 ![Screenshot01](./Assets/Screenshot-01.JPG)
 ![Screenshot02](./Assets/Screenshot-02.JPG)
 ![Screenshot03](./Assets/Screenshot-03.JPG)
 ![Screenshot04](./Assets/Screenshot-04.JPG)
-Mobile screenshots :
-<br>
-<img src="./Assets/Screenshot-01-Mobile.PNG" width="20%">
-<img src="./Assets/Screenshot-02-Mobile.PNG" width="20%">
-<img src="./Assets/Screenshot-03-Mobile.PNG" width="20%">
-<img src="./Assets/Screenshot-04-Mobile.PNG" width="20%">
+
+Demo: 
+![Demo](./Assets/Demo.gif)
 -----------------------------------------------------------------------------------------------------------------------
 
 ## 8. URLs
 
-* The URL of the deployed application : "https://saadiaelf.github.io/Portfolio_SEF/"
+* The URL of the deployed application : "https://saadiaelf.github.io/Code_Quiz_SEF/"
 
-* The URL of the GitHub repository: https://github.com/SaadiaELF/Portfolio_SEF.git
+* The URL of the GitHub repository: "https://github.com/SaadiaELF/Code_Quiz_SEF.git"
 
 -----------------------------------------------------------------------------------------------------------------------
