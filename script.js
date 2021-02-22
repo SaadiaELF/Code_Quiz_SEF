@@ -1,3 +1,4 @@
+// variables declaration
 var timeEl = document.getElementById("timer");
 var startBtn = document.getElementById("startButton");
 var startPage = document.getElementById("startPage");
@@ -14,10 +15,15 @@ var highscoresPage = document.getElementById("highscoresPage");
 var highscoresBtn = document.getElementById("highscores");
 var backBtn = document.getElementById("back");
 var clearBtn = document.getElementById("clear");
+// initialize time variable
 var secondsLeft = 60;
+// initialize time variable
 var score = 0;
+// set this boolean variable to false when the score page is hide
 var showScores = false;
+// set this boolean variable to false when the start page is shown
 var showPage = true;
+
 // Object that holds questions and their answers 
 var Questions = [
     {
@@ -80,16 +86,17 @@ var Questions = [
         ]
     },
 ];
+
 // Click to show highscores page
 highscoresBtn.addEventListener("click", function (event) {
     if (showPage) {
-    event.preventDefault();
-    startPage.classList.add("hide");
-    questionContainer.classList.add("hide");
-    scorePage.classList.add("hide");
-    highscoresPage.classList.remove("hide");
-    renderHighscores();
-};
+        event.preventDefault();
+        startPage.classList.add("hide");
+        questionContainer.classList.add("hide");
+        scorePage.classList.add("hide");
+        highscoresPage.classList.remove("hide");
+        renderHighscores();
+    };
 });
 
 // Setting up a timer 
@@ -97,7 +104,7 @@ function startTimer() {
     var timerInterval = setInterval(function () {
         secondsLeft--;
         timeEl.textContent = "Time : " + secondsLeft;
-
+        // if the timer arrive at 0 or if the score page is shown the timer is stoped
         if (showScores === true || secondsLeft <= 0) {
             showScore();
             clearInterval(timerInterval);
@@ -165,7 +172,7 @@ function clickBtn(a) {
             }
         });
     });
-
+    // If we are in the last question the score page will be shown
     if (a == 6) {
         btns.forEach(function (btn, i) {
             btn.addEventListener("click", function () {
@@ -177,7 +184,7 @@ function clickBtn(a) {
     }
 };
 
-
+// Function to show the score page
 function showScore() {
     questionRow.classList.add("hide");
     answerRow.classList.add("hide");
@@ -186,6 +193,7 @@ function showScore() {
     saveName();
 }
 
+// Function to tell if the answer is correct or wrong
 function trueFalse(a, i) {
     // if the answers is true increment the score by 10 and show "Correct answer !!"
     if (Questions[a - 1].answers[i][1]) {
@@ -194,7 +202,7 @@ function trueFalse(a, i) {
         answer.style.color = "green"
         answerRow.classList.remove("hide");
 
-        // if the answers is false increment the score by 10 and show "Wrong answer !!"
+        // if the answers is false decrement the time by 5 and show "Wrong answer !!"
     } else {
         secondsLeft -= 5;
         answer.textContent = "Wrong answer !!"
@@ -204,7 +212,7 @@ function trueFalse(a, i) {
 
 }
 
-// Creating locl storage to store initials and scores
+// Creating local storage to store initials and scores
 function saveName() {
     submit.addEventListener("click", function (event) {
         event.preventDefault();
@@ -226,6 +234,7 @@ function saveName() {
     });
 }
 
+// Function to display the list of scores in descending order
 function renderHighscores() {
     scorePage.classList.add("hide");
     highscoresPage.classList.remove("hide");
@@ -238,11 +247,13 @@ function renderHighscores() {
     }
 }
 
+// When the back button is clicked the page will reload
 back.addEventListener("click", function (event) {
     event.preventDefault();
     location.reload();
 });
 
+// When the clear button is clicked the local storage will be cleared
 clear.addEventListener("click", function (event) {
     event.preventDefault();
     scoresList.textContent = "";
