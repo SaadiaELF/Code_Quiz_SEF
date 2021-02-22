@@ -22,3 +22,7 @@ body {
 .btn{
     font-weight: bolder;
 }
+#highscores:hover {
+color: blue;
+font-weight: bolder;
+}
