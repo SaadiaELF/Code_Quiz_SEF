@@ -1,23 +1,24 @@
+/* Costumize font */
 body {
     font-family: 'Dosis', sans-serif;
     font-weight: bold;
 }
 #startPage h1{
-font-family: 'Oswald', sans-serif;
+    font-family: 'Oswald', sans-serif;
 }
+
+/* Class to hide content */
 .hide {
     display: none;
 }
-
+/* Delete bullet points */
 #highscoreBtn {
     list-style-type: none;
 }
-
+/* Make btn next to each others */
 #highscoreBtn li {
     display: inline-block;
 }
-
 .btn{
     font-weight: bolder;
 }
-
